@@ -24,7 +24,7 @@ export const profile = {
   github: "https://github.com/kush2439p",
   linkedin: "https://www.linkedin.com/in/kushvyas2439p/",
   leetcode: "https://leetcode.com/u/kushv619/",
-  resume: "/assets/documents/Kush-Vyas-Resume.pdf",
+  resume: "https://raw.githubusercontent.com/kush2439p/kush-vyas-portfolio/master/public/assets/documents/Kush-Vyas-Resume.pdf",
 };
 
 export const projects: Project[] = [

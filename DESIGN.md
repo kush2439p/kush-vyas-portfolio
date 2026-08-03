@@ -42,7 +42,7 @@ Use a fixed light scheme. No theme switch and no automatic dark mode.
 
 ## Home page sequence
 
-1. **First-visit loader**. A thin copper line folds into `KV`, then opens. CSS animation guarantees it exits even if JavaScript is delayed. Reduced-motion users skip it.
+1. **First-visit loader**. A restrained sequence of mineral-colour tiles rises and settles. CSS animation guarantees it exits even if JavaScript is delayed. Reduced-motion users skip it.
 2. **Light hero**. A typography-only editorial manifesto with a large left-aligned name and positioning. Use cropped, masked text, a copper field, and subtle type movement as the visual composition. Do not place a portrait, deity, character, or hero image here.
 3. **Selected work sequence**. A compact pinned type-led sequence progresses through four projects. Each frame uses a huge kinetic chocolate-toned project name, concise engineering notes, stack, and source link. Do not render project images or a card grid here.
 5. **Open-source field notes**. `13 authored PRs` is the headline, followed by actual Redis, Hazelcast, Apache Spark, and Appwrite references with their PR numbers and direct links.
@@ -74,8 +74,8 @@ Style: editorial technical illustration, warm off-white ground, charcoal linewor
 ## GSAP motion plan
 
 - Use `gsap.matchMedia()` to scope desktop-only project-deck and hover choreography.
-- Loader: line draw, monogram mask, opacity exit. CSS animation fallback ends it at 1.1 seconds.
-- Hero entry: a small mosaic of terracotta and cream squares resolves around the title, then the title and supporting copy rise in sequence.
+- Loader: abstract tile rise, opacity exit. CSS animation fallback ends it at 1.1 seconds.
+- Hero entry: title and supporting copy rise in sequence. Desktop may include a single quiet decorative mark.
 - Hero: masked words rise once, then settle. The composition may use a subtle copper field and type-scale shift only when reduced motion is off.
 - Work sequence: each project crossfades with a 10px directional shift as its scroll segment becomes active. Its title may cycle through a restrained set of font variations only while hovered.
 - Experience sequence: a vertical rule draws from top to bottom. Each proof point crossfades and shifts into a shared left-copy, right-word layout.
@@ -83,7 +83,7 @@ Style: editorial technical illustration, warm off-white ground, charcoal linewor
 - Experience: line segments draw as their chapter enters view.
 - Keep the native cursor visible. A small cursor aura may change to muted forest green over interactive text. Nearby letters lift smoothly but are never hidden or replaced. Do not use canvas, WebGL, or scroll listeners driving React state.
 - Reduced motion presents complete content immediately and disables looping or pointer motion.
-- Mobile uses a separate one-column rhythm: a compact expandable navigation, a small visible mosaic near the hero title, full-height-ish project and experience chapters with one-time entry reveals, and tactile press feedback. Do not attempt to simulate a desktop cursor on touch devices.
+- Mobile uses a separate one-column rhythm: a compact expandable navigation, a clean type-led hero without desktop decoration, project chapters with one-time entry reveals, a horizontal experience rail, and tactile press feedback. Do not attempt to simulate a desktop cursor on touch devices.
 
 ## Responsive and accessibility rules
 

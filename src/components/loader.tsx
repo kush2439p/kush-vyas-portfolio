@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Carrot, Rabbit } from "@phosphor-icons/react";
 import { MagneticText } from "@/components/magnetic-text";
 
 export function Loader() {
@@ -28,9 +27,8 @@ export function Loader() {
 
   return (
     <div className="site-loader" aria-hidden="true">
-      <div className="loader-chase"><Rabbit className="loader-bunny" weight="fill" /><span className="loader-track" /><Carrot className="loader-carrot" weight="fill" /></div>
-      <div className="loader-mark"><span>K</span><span>V</span></div>
-      <p><MagneticText text="Loading a thoughtful portfolio" /></p>
+      <div className="loader-sequence">{Array.from({ length: 5 }, (_, index) => <span key={index} />)}</div>
+      <p><MagneticText text="Opening portfolio" /></p>
     </div>
   );
 }

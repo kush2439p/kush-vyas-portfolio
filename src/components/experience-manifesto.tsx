@@ -1,6 +1,7 @@
 "use client";
 
 import { useLayoutEffect, useRef } from "react";
+import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MagneticText } from "@/components/magnetic-text";
@@ -36,12 +37,6 @@ export function ExperienceManifesto() {
           timeline.to(previous, { autoAlpha: 0, scale: 0.98, y: -20, duration: 0.48, ease: "power2.inOut" }, `+=${index === 1 ? 0.58 : 0.4}`).fromTo(panel, { autoAlpha: 0, scale: 1.02, y: 20 }, { autoAlpha: 1, scale: 1, y: 0, duration: 0.58, ease: "power3.out" }, ">");
         });
       });
-      media.add("(max-width: 767px)", () => {
-        const panels = gsap.utils.toArray<HTMLElement>("[data-experience-panel]");
-        panels.forEach((panel) => {
-          gsap.fromTo(panel, { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.76, ease: "power3.out", scrollTrigger: { trigger: panel, start: "top 86%", once: true } });
-        });
-      });
       return () => media.revert();
     }, root);
     return () => context.revert();
@@ -50,7 +45,7 @@ export function ExperienceManifesto() {
   return (
     <section className="experience-manifesto" id="experience" ref={root} aria-labelledby="experience-title">
       <div className="experience-manifesto-sticky">
-        <div className="experience-manifesto-heading"><p><MagneticText text="Experience and open source" /></p><h2 id="experience-title"><MagneticText text="Where I have worked." /></h2></div>
+        <div className="experience-manifesto-heading"><p><MagneticText text="Experience and open source" /></p><h2 id="experience-title"><MagneticText text="Where I have worked." /></h2><p className="experience-swipe-hint"><MagneticText text="Swipe through" /> <ArrowRight aria-hidden="true" /></p></div>
         <div className="experience-rule" aria-hidden="true"><span data-experience-line /></div>
         <div className="experience-moments">
           {moments.map((moment, index) => (

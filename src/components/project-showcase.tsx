@@ -30,8 +30,14 @@ export function ProjectShowcase() {
       });
       media.add("(max-width: 767px)", () => {
         const panels = gsap.utils.toArray<HTMLElement>("[data-project-panel]");
+        gsap.set(panels, { autoAlpha: 0, y: 42 });
         panels.forEach((panel) => {
-          gsap.fromTo(panel, { autoAlpha: 0, y: 34 }, { autoAlpha: 1, y: 0, duration: 0.78, ease: "power3.out", scrollTrigger: { trigger: panel, start: "top 86%", once: true } });
+          ScrollTrigger.create({
+            trigger: panel,
+            start: "top 88%",
+            once: true,
+            onEnter: () => gsap.to(panel, { autoAlpha: 1, y: 0, duration: 1.05, ease: "power3.out", overwrite: true }),
+          });
         });
       });
       return () => media.revert();

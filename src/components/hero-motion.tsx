@@ -3,6 +3,7 @@
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { MagneticText } from "@/components/magnetic-text";
+import { profile } from "@/data/portfolio";
 
 export function HeroMotion() {
   const root = useRef<HTMLElement>(null);
@@ -36,7 +37,8 @@ export function HeroMotion() {
         <p><MagneticText text="Full-stack Java developer focused on secure backend systems and clear product interfaces." /></p>
         <div className="hero-actions">
           <a href="#work" className="button-link"><MagneticText text="See work" /></a>
-          <a href="/assets/documents/Kush-Vyas-Resume.pdf" className="quiet-link" download><MagneticText text="Resume" /></a>
+          <a href={profile.resume} className="quiet-link" target="_blank" rel="noreferrer"><MagneticText text="View resume" /></a>
+          <a href={profile.resume} className="quiet-link hero-download" download><MagneticText text="Download" /></a>
         </div>
       </div>
       <p className="hero-coordinate" data-hero-detail><MagneticText text="Java. Spring Boot. Product engineering." /></p>
