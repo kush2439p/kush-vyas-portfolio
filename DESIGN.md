@@ -83,7 +83,7 @@ Style: editorial technical illustration, warm off-white ground, charcoal linewor
 - Experience: line segments draw as their chapter enters view.
 - Keep the native cursor visible. A small cursor aura may change to muted forest green over interactive text. Nearby letters lift smoothly but are never hidden or replaced. Do not use canvas, WebGL, or scroll listeners driving React state.
 - Reduced motion presents complete content immediately and disables looping or pointer motion.
-- Mobile uses a separate one-column rhythm: a compact expandable navigation, a clean type-led hero without desktop decoration, project chapters with one-time entry reveals, a horizontal experience rail, and tactile press feedback. Do not attempt to simulate a desktop cursor on touch devices.
+- Mobile uses a separate one-column rhythm: a compact expandable navigation, a centred type-led hero with a restrained animated tile field, project chapters with one-time entry reveals, a horizontal experience rail whose chapters open through a subtle tile wipe, and tactile press feedback. Do not attempt to simulate a desktop cursor on touch devices.
 
 ## Responsive and accessibility rules
 
