@@ -103,6 +103,9 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
 .hero-constellation span { background: var(--accent); border-radius: 50%; display: block; height: 9px; width: 9px; }
 .hero-constellation span:nth-child(2) { background: var(--accent-soft); height: 18px; width: 18px; }
 .hero-coordinate { bottom: 49px; color: var(--muted); font-family: var(--mono); font-size: 10px; left: calc(clamp(20px, 6vw, 104px) + clamp(130px, 13vw, 220px)); letter-spacing: .06em; margin: 0; position: absolute; text-transform: uppercase; z-index: 2; }
+.hero-pixels { display: grid; gap: 7px; grid-template-columns: repeat(5, 12px); position: absolute; right: clamp(170px, 21vw, 350px); top: clamp(170px, 22vw, 360px); z-index: 0; }
+.hero-pixels span { background: var(--accent-soft); display: block; height: 12px; width: 12px; }
+.hero-pixels span:nth-child(3n) { background: var(--accent); }
 
 .magnetic-text { display: inline; }
 .magnetic-word { display: inline; white-space: nowrap; }
@@ -138,10 +141,6 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
 .project-scene a { align-items: center; display: inline-flex; font-family: var(--mono); font-size: 10px; gap: 8px; letter-spacing: .06em; text-transform: uppercase; }
 .project-scene a svg { height: 16px; transition: transform 180ms ease; width: 16px; }
 .project-scene a:hover svg { transform: translate(3px, -3px); }
-.project-pixel-wipe { display: none; gap: 3px; grid-template-columns: repeat(5, 1fr); inset: 0; pointer-events: none; position: absolute; z-index: 2; }
-.project-pixel-wipe span { background: var(--canvas); border: 1px solid color-mix(in srgb, var(--accent-soft) 55%, transparent); }
-.project-pixel-wipe span:nth-child(4n) { background: color-mix(in srgb, var(--accent-soft) 78%, var(--canvas)); }
-.project-pixel-wipe span:nth-child(7n) { background: color-mix(in srgb, var(--highlight) 18%, var(--canvas)); }
 
 .work-section, .experience-section { padding: clamp(100px, 13vw, 210px) clamp(20px, 6vw, 104px); }
 .work-section { border-top: 1px solid var(--line); }
@@ -209,7 +208,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
 .experience-rule span { background: var(--accent); display: block; height: 100%; transform-origin: top center; width: 100%; }
 .experience-moments { height: 100%; position: relative; }
 .experience-summary { color: var(--muted); font-size: 16px; line-height: 1.55; margin: 0; max-width: 30ch; position: absolute; right: clamp(20px, 7vw, 132px); top: 132px; z-index: 2; }
-.experience-moment { align-items: start; display: grid; gap: clamp(66px, 12vw, 210px); grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); inset: 0; padding: clamp(300px, 38vh, 420px) 4vw clamp(38px, 7vh, 82px) 0; position: absolute; }
+.experience-moment { align-items: start; bottom: 42px; display: grid; gap: clamp(66px, 12vw, 210px); grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); left: 0; padding: 0 4vw 0 0; position: absolute; right: 0; top: clamp(300px, 38vh, 420px); }
 .experience-copy { grid-column: 1; max-width: 480px; }
 .experience-copy > p:first-child { color: var(--accent); font-family: var(--mono); font-size: 10px; letter-spacing: .06em; margin: 0 0 17px; text-transform: uppercase; }
 .experience-copy h3 { font-size: clamp(30px, 3vw, 50px); font-weight: 620; letter-spacing: -.07em; line-height: .98; margin: 0; }
@@ -279,6 +278,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
   .button-link { padding: 16px 18px; }
   .hero-download { display: inline-block; }
   .hero-constellation, .hero-coordinate { display: none; }
+  .hero-pixels { display: none; }
   .magnetic-text [data-repel-letter] { will-change: auto; }
   .project-showcase-sticky { height: auto; overflow: visible; padding: 78px 20px 84px; }
   .project-showcase-heading { left: auto; position: static; transform: none; width: auto; }

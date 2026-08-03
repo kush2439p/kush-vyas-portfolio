@@ -19,36 +19,24 @@ export function ProjectShowcase() {
       const media = gsap.matchMedia();
       media.add("(min-width: 768px)", () => {
         const panels = gsap.utils.toArray<HTMLElement>("[data-project-panel]");
-        const wipes = gsap.utils.toArray<HTMLElement>("[data-project-wipe]");
         gsap.set(panels, { autoAlpha: 0 });
         gsap.set(panels[0], { autoAlpha: 1 });
-        gsap.set(wipes, { display: "grid" });
-        gsap.set(wipes[0], { autoAlpha: 0 });
         const timeline = gsap.timeline({ scrollTrigger: { trigger: root.current, start: "top top", end: "+=360%", pin: ".project-showcase-sticky", scrub: 1.2, anticipatePin: 1 } });
         panels.forEach((panel, index) => {
           if (index === 0) return;
           const previous = panels[index - 1];
-          const tiles = panel.querySelectorAll<HTMLElement>("[data-project-tile]");
-          timeline.to(previous, { autoAlpha: 0, scale: 0.98, y: index % 2 ? -24 : 24, duration: 0.48, ease: "power2.inOut" }, `+=${index === 1 ? 0.58 : 0.4}`).fromTo(panel, { autoAlpha: 0, scale: 1.02, y: index % 2 ? 24 : -24 }, { autoAlpha: 1, scale: 1, y: 0, duration: 0.58, ease: "power3.out" }, ">").set(wipes[index], { autoAlpha: 1 }, "<").to(tiles, { autoAlpha: 0, scale: 0.58, duration: 0.44, stagger: { each: 0.018, from: "random" }, ease: "power2.out" }, "<0.06");
+          timeline.to(previous, { autoAlpha: 0, scale: 0.98, y: index % 2 ? -24 : 24, duration: 0.48, ease: "power2.inOut" }, `+=${index === 1 ? 0.58 : 0.4}`).fromTo(panel, { autoAlpha: 0, scale: 1.02, y: index % 2 ? 24 : -24 }, { autoAlpha: 1, scale: 1, y: 0, duration: 0.58, ease: "power3.out" }, ">");
         });
       });
       media.add("(max-width: 767px)", () => {
         const panels = gsap.utils.toArray<HTMLElement>("[data-project-panel]");
-        gsap.set("[data-project-wipe]", { display: "grid" });
         gsap.set(panels, { autoAlpha: 0, y: 42 });
         panels.forEach((panel) => {
           ScrollTrigger.create({
             trigger: panel,
             start: "top 88%",
             once: true,
-            onEnter: () => {
-              const wipe = panel.querySelector<HTMLElement>("[data-project-wipe]");
-              const tiles = panel.querySelectorAll<HTMLElement>("[data-project-tile]");
-              const timeline = gsap.timeline({ defaults: { overwrite: "auto" } });
-              timeline.to(panel, { autoAlpha: 1, y: 0, duration: 0.8, ease: "power3.out" });
-              if (wipe) timeline.set(wipe, { autoAlpha: 1 });
-              timeline.to(tiles, { autoAlpha: 0, scale: 0.58, duration: 0.44, stagger: { each: 0.018, from: "random" }, ease: "power2.out" }, "<0.06");
-            },
+            onEnter: () => gsap.to(panel, { autoAlpha: 1, y: 0, duration: 1.05, ease: "power3.out", overwrite: true }),
           });
         });
       });
@@ -66,7 +54,6 @@ export function ProjectShowcase() {
             const reversed = index % 2 === 1;
             return (
               <article className={`project-panel ${reversed ? "project-panel-even" : "project-panel-odd"}`} data-project-panel key={project.slug}>
-                <div className="project-pixel-wipe" data-project-wipe aria-hidden="true">{Array.from({ length: 20 }, (_, tile) => <span data-project-tile key={tile} />)}</div>
                 <div className="project-overview">
                   <p className="project-index"><MagneticText text={`0${index + 1}`} /></p>
                   <h3><KineticTitle text={project.title} /></h3>

@@ -33,6 +33,7 @@ export function HeroMotion() {
     <section className="hero" ref={root} aria-labelledby="hero-title">
       <p className="hero-kicker" data-hero-detail><MagneticText text="Java backend developer. Product-minded builder." /></p>
       <div className="hero-constellation" aria-hidden="true"><span /><span /><span /></div>
+      <div className="hero-pixels" aria-hidden="true">{Array.from({ length: 20 }, (_, index) => <span data-hero-pixel key={index} />)}</div>
       <h1 id="hero-title" className="hero-title">
         <span className="hero-title-wipe" data-hero-title-wipe aria-hidden="true">{Array.from({ length: 20 }, (_, index) => <span data-hero-title-tile key={index} />)}</span>
         <span className="hero-mask"><span data-hero-word><MagneticText text="Kush" /></span></span>

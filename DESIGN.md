@@ -77,13 +77,13 @@ Style: editorial technical illustration, warm off-white ground, charcoal linewor
 - Loader: abstract tile rise, opacity exit. CSS animation fallback ends it at 1.1 seconds.
 - Hero entry: title and supporting copy rise in sequence. A short tile mask may reveal the title, but tiles must not remain as decoration once the entrance completes.
 - Hero: masked words rise once, then settle. The composition may use a subtle copper field and type-scale shift only when reduced motion is off.
-- Work sequence: each project crossfades with a 10px directional shift and a restrained tile wipe as its scroll segment becomes active. Its title may cycle through a restrained set of font variations only while hovered.
+- Work sequence: each project crossfades with a 10px directional shift as its scroll segment becomes active. Its title may cycle through a restrained set of font variations only while hovered.
 - Experience sequence: a vertical rule draws from top to bottom. Each proof point crossfades and shifts into a shared left-copy, right-word layout.
 - Text lift: letters within selected headings, navigation items, body copy, and footer email move a few pixels upward or downward around a nearby fine-pointer cursor. One shared requestAnimationFrame loop handles every registered text group. Disable it on tablet, mobile, and reduced-motion preferences.
 - Experience: line segments draw as their chapter enters view.
 - Keep the native cursor visible. A small cursor aura may change to muted forest green over interactive text. Nearby letters lift smoothly but are never hidden or replaced. Do not use canvas, WebGL, or scroll listeners driving React state.
 - Reduced motion presents complete content immediately and disables looping or pointer motion.
-- Mobile uses a separate one-column rhythm: a compact expandable navigation, a centred type-led hero with a restrained animated tile field, project chapters with one-time entry reveals, a horizontal experience rail whose chapters open through a subtle tile wipe, and tactile press feedback. Do not attempt to simulate a desktop cursor on touch devices.
+- Mobile uses a separate one-column rhythm: a compact expandable navigation, a centred type-led hero with a restrained tile-mask reveal and no static pixel mark, project chapters with one-time entry reveals, a horizontal experience rail whose chapters open through a subtle tile wipe, and tactile press feedback. Do not attempt to simulate a desktop cursor on touch devices.
 
 ## Responsive and accessibility rules
 
