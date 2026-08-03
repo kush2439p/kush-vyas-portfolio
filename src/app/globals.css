@@ -85,6 +85,10 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
 .hero-title { align-self: center; font-size: clamp(84px, 16.5vw, 256px); font-weight: 640; grid-column: 1 / -1; letter-spacing: -0.135em; line-height: .72; margin: 0; padding: 0 0 .16em; position: relative; z-index: 1; }
 .hero-mask { display: block; overflow: hidden; }
 .hero-mask > span { display: block; transform-origin: 20% 100%; }
+.hero-title-wipe { display: none; gap: 3px; grid-template-columns: repeat(5, 1fr); inset: 0; pointer-events: none; position: absolute; z-index: 2; }
+.hero-title-wipe span { background: var(--canvas); border: 1px solid color-mix(in srgb, var(--accent-soft) 55%, transparent); }
+.hero-title-wipe span:nth-child(4n) { background: color-mix(in srgb, var(--accent-soft) 78%, var(--canvas)); }
+.hero-title-wipe span:nth-child(7n) { background: color-mix(in srgb, var(--highlight) 18%, var(--canvas)); }
 .hero-accent-word { color: var(--accent); padding-left: clamp(28px, 13vw, 250px); }
 .hero-detail { align-self: end; grid-column: 2; justify-self: start; max-width: 360px; min-width: 0; padding-right: 24px; position: relative; width: 100%; z-index: 1; }
 .hero-detail > p { color: var(--muted); font-size: 17px; line-height: 1.58; margin: 0 0 26px; }
@@ -99,9 +103,6 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
 .hero-constellation span { background: var(--accent); border-radius: 50%; display: block; height: 9px; width: 9px; }
 .hero-constellation span:nth-child(2) { background: var(--accent-soft); height: 18px; width: 18px; }
 .hero-coordinate { bottom: 49px; color: var(--muted); font-family: var(--mono); font-size: 10px; left: calc(clamp(20px, 6vw, 104px) + clamp(130px, 13vw, 220px)); letter-spacing: .06em; margin: 0; position: absolute; text-transform: uppercase; z-index: 2; }
-.hero-pixels { display: grid; gap: 7px; grid-template-columns: repeat(5, 12px); position: absolute; right: clamp(170px, 21vw, 350px); top: clamp(170px, 22vw, 360px); z-index: 0; }
-.hero-pixels span { background: var(--accent-soft); display: block; height: 12px; width: 12px; }
-.hero-pixels span:nth-child(3n) { background: var(--accent); }
 
 .magnetic-text { display: inline; }
 .magnetic-word { display: inline; white-space: nowrap; }
@@ -207,7 +208,8 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
 .experience-rule { background: var(--line); bottom: 13%; left: 50%; position: absolute; top: 17%; width: 1px; }
 .experience-rule span { background: var(--accent); display: block; height: 100%; transform-origin: top center; width: 100%; }
 .experience-moments { height: 100%; position: relative; }
-.experience-moment { align-items: center; display: grid; gap: clamp(66px, 12vw, 210px); grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); inset: 0; padding: 31vh 4vw 0 0; position: absolute; }
+.experience-summary { color: var(--muted); font-size: 16px; line-height: 1.55; margin: 0; max-width: 30ch; position: absolute; right: clamp(20px, 7vw, 132px); top: 132px; z-index: 2; }
+.experience-moment { align-items: start; display: grid; gap: clamp(66px, 12vw, 210px); grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); inset: 0; padding: clamp(300px, 38vh, 420px) 4vw clamp(38px, 7vh, 82px) 0; position: absolute; }
 .experience-copy { grid-column: 1; max-width: 480px; }
 .experience-copy > p:first-child { color: var(--accent); font-family: var(--mono); font-size: 10px; letter-spacing: .06em; margin: 0 0 17px; text-transform: uppercase; }
 .experience-copy h3 { font-size: clamp(30px, 3vw, 50px); font-weight: 620; letter-spacing: -.07em; line-height: .98; margin: 0; }
@@ -276,8 +278,6 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
   .hero-actions { flex-wrap: wrap; gap: 14px 18px; }
   .button-link { padding: 16px 18px; }
   .hero-download { display: inline-block; }
-  .hero-pixels { display: grid; gap: 5px; grid-template-columns: repeat(4, 7px); left: auto; pointer-events: none; right: 24px; top: 29%; transform: none; z-index: 2; }
-  .hero-pixels span { height: 7px; width: 7px; }
   .hero-constellation, .hero-coordinate { display: none; }
   .magnetic-text [data-repel-letter] { will-change: auto; }
   .project-showcase-sticky { height: auto; overflow: visible; padding: 78px 20px 84px; }
@@ -305,6 +305,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
   .experience-manifesto-heading { left: auto; position: static; }
   .experience-manifesto-heading { padding: 0 20px; }
   .experience-manifesto-heading h2 { font-size: clamp(42px, 13vw, 72px); }
+  .experience-summary { display: none; }
   .experience-swipe-hint { align-items: center; color: var(--accent); display: flex; font-family: var(--mono); font-size: 10px; gap: 7px; letter-spacing: .06em; margin: 24px 0 0; text-transform: uppercase; }
   .experience-swipe-hint svg { height: 15px; width: 15px; }
   .experience-rule { display: none; }

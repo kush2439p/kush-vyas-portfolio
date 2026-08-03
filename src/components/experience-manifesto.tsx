@@ -101,6 +101,7 @@ export function ExperienceManifesto() {
     <section className="experience-manifesto" id="experience" ref={root} aria-labelledby="experience-title">
       <div className="experience-manifesto-sticky">
         <div className="experience-manifesto-heading"><p><MagneticText text="Experience and open source" /></p><h2 id="experience-title"><MagneticText text="Where I have worked." /></h2><p className="experience-swipe-hint"><MagneticText text="Swipe through" /> <ArrowRight aria-hidden="true" /></p></div>
+        <p className="experience-summary"><MagneticText text="A focused record of teaching, security-minded backend work, and contributions upstream." /></p>
         <div className="experience-rule" aria-hidden="true"><span data-experience-line /></div>
         <div className="experience-moments" data-experience-rail>
           {moments.map((moment, index) => (

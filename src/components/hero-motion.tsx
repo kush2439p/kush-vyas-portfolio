@@ -17,7 +17,12 @@ export function HeroMotion() {
         { yPercent: 112, rotate: 1.5, opacity: 0 },
         { yPercent: 0, rotate: 0, opacity: 1, duration: 1.05, stagger: 0.12, ease: "power4.out", delay: 0.15 },
       );
-      gsap.fromTo("[data-hero-pixel]", { opacity: 0, scale: 0.25 }, { opacity: 1, scale: 1, duration: 0.52, stagger: { each: 0.045, from: "random" }, ease: "power2.out", delay: 0.04 });
+      const titleWipe = root.current?.querySelector<HTMLElement>("[data-hero-title-wipe]");
+      const titleTiles = root.current?.querySelectorAll<HTMLElement>("[data-hero-title-tile]");
+      if (titleWipe && titleTiles) {
+        gsap.set(titleWipe, { display: "grid", autoAlpha: 1 });
+        gsap.to(titleTiles, { autoAlpha: 0, scale: 0.58, duration: 0.46, stagger: { each: 0.02, from: "random" }, ease: "power2.out", delay: 0.14 });
+      }
       gsap.fromTo("[data-hero-detail]", { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, stagger: 0.08, ease: "power3.out", delay: 0.68 });
     }, root);
 
@@ -28,8 +33,8 @@ export function HeroMotion() {
     <section className="hero" ref={root} aria-labelledby="hero-title">
       <p className="hero-kicker" data-hero-detail><MagneticText text="Java backend developer. Product-minded builder." /></p>
       <div className="hero-constellation" aria-hidden="true"><span /><span /><span /></div>
-      <div className="hero-pixels" aria-hidden="true">{Array.from({ length: 20 }, (_, index) => <span data-hero-pixel key={index} />)}</div>
       <h1 id="hero-title" className="hero-title">
+        <span className="hero-title-wipe" data-hero-title-wipe aria-hidden="true">{Array.from({ length: 20 }, (_, index) => <span data-hero-title-tile key={index} />)}</span>
         <span className="hero-mask"><span data-hero-word><MagneticText text="Kush" /></span></span>
         <span className="hero-mask"><span className="hero-accent-word" data-hero-word><MagneticText text="Vyas" /></span></span>
       </h1>

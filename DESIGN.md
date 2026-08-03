@@ -75,7 +75,7 @@ Style: editorial technical illustration, warm off-white ground, charcoal linewor
 
 - Use `gsap.matchMedia()` to scope desktop-only project-deck and hover choreography.
 - Loader: abstract tile rise, opacity exit. CSS animation fallback ends it at 1.1 seconds.
-- Hero entry: title and supporting copy rise in sequence. Desktop may include a single quiet decorative mark.
+- Hero entry: title and supporting copy rise in sequence. A short tile mask may reveal the title, but tiles must not remain as decoration once the entrance completes.
 - Hero: masked words rise once, then settle. The composition may use a subtle copper field and type-scale shift only when reduced motion is off.
 - Work sequence: each project crossfades with a 10px directional shift and a restrained tile wipe as its scroll segment becomes active. Its title may cycle through a restrained set of font variations only while hovered.
 - Experience sequence: a vertical rule draws from top to bottom. Each proof point crossfades and shifts into a shared left-copy, right-word layout.
