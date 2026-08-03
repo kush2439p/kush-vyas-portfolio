@@ -45,7 +45,6 @@ export function ExperienceManifesto() {
 
         if (!rail || panels.length === 0) return;
 
-        gsap.set(panels, { autoAlpha: 0.38 });
         gsap.set("[data-experience-wipe]", { display: "grid" });
 
         const revealPanel = (index: number) => {
@@ -57,9 +56,8 @@ export function ExperienceManifesto() {
           const copy = panel.querySelector<HTMLElement>("[data-experience-copy]");
           const side = panel.querySelector<HTMLElement>("[data-experience-side]");
 
-          gsap.to(panels, { autoAlpha: 0.38, duration: 0.28, overwrite: "auto" });
           const timeline = gsap.timeline({ defaults: { overwrite: "auto" } });
-          timeline.to(panel, { autoAlpha: 1, duration: 0.32, ease: "power2.out" });
+          timeline.to(panel, { autoAlpha: 1, duration: 0.2, ease: "power2.out" });
           if (wipe) timeline.set(wipe, { autoAlpha: 1 });
           timeline.fromTo(tiles, { autoAlpha: 1, scale: 1 }, { autoAlpha: 0, scale: 0.58, duration: 0.38, stagger: { each: 0.025, from: "random" }, ease: "power2.out" }, "<");
           timeline.fromTo([copy, side], { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.5, stagger: 0.07, ease: "power3.out" }, "<0.1");

@@ -121,15 +121,15 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
 .project-showcase-heading p { color: var(--accent); font-family: var(--mono); font-size: 10px; letter-spacing: .06em; margin: 0; text-transform: uppercase; }
 .project-showcase-heading h2 { font-size: clamp(48px, 5.1vw, 94px); font-weight: 520; letter-spacing: -.09em; line-height: .95; margin: 14px 0 0; white-space: nowrap; }
 .project-panels { height: 100%; position: relative; }
-.project-panel { align-items: center; display: grid; gap: clamp(48px, 8vw, 150px); grid-template-columns: minmax(0, 1fr) minmax(310px, .8fr); inset: 0; padding-top: 21vh; position: absolute; }
-.project-overview { max-width: min(100%, 680px); min-width: 0; }
+.project-panel { align-items: center; display: grid; gap: clamp(48px, 8vw, 150px); grid-template-columns: minmax(0, 1fr) minmax(310px, .8fr); inset: 0; overflow: hidden; padding-top: 21vh; position: absolute; }
+.project-overview { max-width: min(100%, 680px); min-width: 0; position: relative; z-index: 3; }
 .project-panel-odd .project-overview { grid-column: 1; }
 .project-panel-odd .project-scene { grid-column: 2; }
 .project-panel-even .project-overview { grid-column: 2; }
 .project-panel-even .project-scene { grid-column: 1; grid-row: 1; }
 .project-index { color: var(--accent); font-family: var(--mono); font-size: 11px; letter-spacing: .08em; margin: 0 0 14px; }
 .project-overview h3 { font-size: clamp(56px, 6.8vw, 120px); font-weight: 520; letter-spacing: -.1em; line-height: .86; margin: 0; overflow-wrap: anywhere; }
-.project-scene { border-top: 1px solid var(--line); max-width: 490px; padding-top: 20px; }
+.project-scene { border-top: 1px solid var(--line); max-width: 490px; padding-top: 20px; position: relative; z-index: 3; }
 .project-scene > p { color: var(--muted); font-size: 16px; line-height: 1.62; margin: 0 0 28px; }
 .project-scene ul { display: flex; flex-wrap: wrap; gap: 7px 13px; list-style: none; margin: 0 0 28px; padding: 0; }
 .project-scene li { color: var(--ink); font-family: var(--mono); font-size: 11px; letter-spacing: .02em; }
@@ -137,6 +137,10 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
 .project-scene a { align-items: center; display: inline-flex; font-family: var(--mono); font-size: 10px; gap: 8px; letter-spacing: .06em; text-transform: uppercase; }
 .project-scene a svg { height: 16px; transition: transform 180ms ease; width: 16px; }
 .project-scene a:hover svg { transform: translate(3px, -3px); }
+.project-pixel-wipe { display: none; gap: 3px; grid-template-columns: repeat(5, 1fr); inset: 0; pointer-events: none; position: absolute; z-index: 2; }
+.project-pixel-wipe span { background: var(--canvas); border: 1px solid color-mix(in srgb, var(--accent-soft) 55%, transparent); }
+.project-pixel-wipe span:nth-child(4n) { background: color-mix(in srgb, var(--accent-soft) 78%, var(--canvas)); }
+.project-pixel-wipe span:nth-child(7n) { background: color-mix(in srgb, var(--highlight) 18%, var(--canvas)); }
 
 .work-section, .experience-section { padding: clamp(100px, 13vw, 210px) clamp(20px, 6vw, 104px); }
 .work-section { border-top: 1px solid var(--line); }
@@ -272,7 +276,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
   .hero-actions { flex-wrap: wrap; gap: 14px 18px; }
   .button-link { padding: 16px 18px; }
   .hero-download { display: inline-block; }
-  .hero-pixels { display: grid; gap: 5px; grid-template-columns: repeat(4, 7px); left: calc(50% + 32px); pointer-events: none; right: auto; top: 43%; transform: translateY(-50%); z-index: 2; }
+  .hero-pixels { display: grid; gap: 5px; grid-template-columns: repeat(4, 7px); left: auto; pointer-events: none; right: 24px; top: 29%; transform: none; z-index: 2; }
   .hero-pixels span { height: 7px; width: 7px; }
   .hero-constellation, .hero-coordinate { display: none; }
   .magnetic-text [data-repel-letter] { will-change: auto; }
@@ -315,7 +319,8 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
   .capability-strip { display: grid; gap: 30px; grid-template-columns: 1fr; padding: 60px 20px 78px; }
   .experience-entry { padding-left: 28px; }
   .site-footer { min-height: 72dvh; padding: 96px 20px 30px; }
-  .site-footer h2 { font-size: clamp(36px, 11vw, 64px); }
+  .site-footer h2 { font-size: clamp(26px, 9.5vw, 42px); line-height: 1.02; max-width: 100%; overflow-wrap: anywhere; }
+  .site-footer h2 .magnetic-word { white-space: normal; }
   .footer-bottom { grid-template-columns: 1fr; margin-top: 90px; }
   .case-study { padding: 112px 20px 54px; }
   .case-image { aspect-ratio: 4 / 5; }
