@@ -208,7 +208,8 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
 .experience-rule span { background: var(--accent); display: block; height: 100%; transform-origin: top center; width: 100%; }
 .experience-moments { height: 100%; position: relative; }
 .experience-summary { color: var(--muted); font-size: 16px; line-height: 1.55; margin: 0; max-width: 30ch; position: absolute; right: clamp(20px, 7vw, 132px); top: 132px; z-index: 2; }
-.experience-moment { align-items: start; bottom: 42px; display: grid; gap: clamp(66px, 12vw, 210px); grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); left: 0; padding: 0 4vw 0 0; position: absolute; right: 0; top: clamp(300px, 38vh, 420px); }
+.experience-pixel-wipe { display: none; }
+.experience-moment { align-items: center; display: grid; gap: clamp(66px, 12vw, 210px); grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); inset: 0; padding: 31vh 4vw 0 0; position: absolute; }
 .experience-copy { grid-column: 1; max-width: 480px; }
 .experience-copy > p:first-child { color: var(--accent); font-family: var(--mono); font-size: 10px; letter-spacing: .06em; margin: 0 0 17px; text-transform: uppercase; }
 .experience-copy h3 { font-size: clamp(30px, 3vw, 50px); font-weight: 620; letter-spacing: -.07em; line-height: .98; margin: 0; }
