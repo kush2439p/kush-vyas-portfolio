@@ -18,3 +18,4 @@
 # debug
 npm-debug.log*
 pnpm-debug.log*
+.vercel
