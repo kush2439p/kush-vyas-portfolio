@@ -1,14 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { MagneticText } from "@/components/magnetic-text";
+import { Leaf } from "@phosphor-icons/react";
 
 export function Loader() {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const seen = window.sessionStorage.getItem("kush-portfolio-loader") === "seen";
+    const seen = window.sessionStorage.getItem("kush-portfolio-copper-leaves-loader-v2") === "seen";
 
     if (reduced || seen) {
       const timer = window.setTimeout(() => setVisible(false), 0);
@@ -16,9 +16,9 @@ export function Loader() {
     }
 
     const timer = window.setTimeout(() => {
-      window.sessionStorage.setItem("kush-portfolio-loader", "seen");
+      window.sessionStorage.setItem("kush-portfolio-copper-leaves-loader-v2", "seen");
       setVisible(false);
-    }, 1080);
+    }, 880);
 
     return () => window.clearTimeout(timer);
   }, []);
@@ -26,9 +26,9 @@ export function Loader() {
   if (!visible) return null;
 
   return (
-    <div className="site-loader" aria-hidden="true">
-      <div className="loader-sequence">{Array.from({ length: 5 }, (_, index) => <span key={index} />)}</div>
-      <p><MagneticText text="Opening portfolio" /></p>
+    <div className="site-loader" data-site-loader aria-hidden="true">
+      <div className="loader-leaves">{Array.from({ length: 7 }, (_, index) => <Leaf data-loader-leaf weight="fill" key={index} />)}</div>
+      <p>KUSH.</p>
     </div>
   );
 }

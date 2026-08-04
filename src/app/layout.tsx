@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
 import { profile } from "@/data/portfolio";
+import { CursorAura } from "@/components/cursor-aura";
+import { Loader } from "@/components/loader";
+import { SpringAtmosphere } from "@/components/spring-atmosphere";
 
 export const metadata: Metadata = {
   title: "Kush Vyas | Java backend developer",
@@ -27,6 +30,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <body>
+        <Loader />
+        <SpringAtmosphere />
+        <CursorAura />
         {children}
         <Script id="person-schema" type="application/ld+json" strategy="afterInteractive">
           {JSON.stringify(personSchema)}

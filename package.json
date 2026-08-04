@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@fontsource-variable/manrope": "latest",
@@ -21,7 +22,9 @@
     "sharp": "latest"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.12.1",
     "@next/swc-wasm-nodejs": "16.2.12",
+    "@playwright/test": "^1.62.1",
     "@tailwindcss/postcss": "latest",
     "@types/node": "latest",
     "@types/react": "latest",

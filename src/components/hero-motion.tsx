@@ -3,6 +3,7 @@
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { MagneticText } from "@/components/magnetic-text";
+import { InteractivePixelMark } from "@/components/interactive-pixel-mark";
 import { profile } from "@/data/portfolio";
 
 export function HeroMotion() {
@@ -33,7 +34,7 @@ export function HeroMotion() {
     <section className="hero" ref={root} aria-labelledby="hero-title">
       <p className="hero-kicker" data-hero-detail><MagneticText text="Java backend developer. Product-minded builder." /></p>
       <div className="hero-constellation" aria-hidden="true"><span /><span /><span /></div>
-      <div className="hero-pixels" aria-hidden="true">{Array.from({ length: 20 }, (_, index) => <span data-hero-pixel key={index} />)}</div>
+      <InteractivePixelMark />
       <h1 id="hero-title" className="hero-title">
         <span className="hero-title-wipe" data-hero-title-wipe aria-hidden="true">{Array.from({ length: 20 }, (_, index) => <span data-hero-title-tile key={index} />)}</span>
         <span className="hero-mask"><span data-hero-word><MagneticText text="Kush" /></span></span>
@@ -44,7 +45,6 @@ export function HeroMotion() {
         <div className="hero-actions">
           <a href="#work" className="button-link"><MagneticText text="See work" /></a>
           <a href={profile.resume} className="quiet-link" target="_blank" rel="noreferrer"><MagneticText text="View resume" /></a>
-          <a href={profile.resume} className="quiet-link hero-download" download><MagneticText text="Download" /></a>
         </div>
       </div>
       <p className="hero-coordinate" data-hero-detail><MagneticText text="Java. Spring Boot. Product engineering." /></p>

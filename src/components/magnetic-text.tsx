@@ -1,17 +1,15 @@
 "use client";
 
 import { useLayoutEffect, useRef } from "react";
+import { subscribePointer } from "@/lib/pointer-runtime";
 
 type Repeller = { root: HTMLElement; letters: HTMLElement[]; mode: "lift" | "scatter" };
 
 const repellers = new Set<Repeller>();
-let frame = 0;
 let pointerX = -1000;
 let pointerY = -1000;
-let attached = false;
 
 function updateRepellers() {
-  frame = 0;
   repellers.forEach(({ root, letters, mode }) => {
     const rootRect = root.getBoundingClientRect();
     const nearGroup = pointerX > rootRect.left - 120 && pointerX < rootRect.right + 120 && pointerY > rootRect.top - 120 && pointerY < rootRect.bottom + 120;
@@ -35,20 +33,17 @@ function updateRepellers() {
   });
 }
 
-function scheduleUpdate() {
-  if (!frame) frame = window.requestAnimationFrame(updateRepellers);
-}
+let unsubscribePointer: (() => void) | undefined;
 
-function handlePointerMove(event: PointerEvent) {
-  pointerX = event.clientX;
-  pointerY = event.clientY;
-  scheduleUpdate();
-}
-
-function handlePointerLeave() {
-  pointerX = -1000;
-  pointerY = -1000;
-  scheduleUpdate();
+function ensurePointerSubscription() {
+  if (unsubscribePointer) return;
+  unsubscribePointer = subscribePointer({
+    onPointer: (frame) => {
+      pointerX = frame.active ? frame.x : -1000;
+      pointerY = frame.active ? frame.y : -1000;
+      updateRepellers();
+    },
+  });
 }
 
 export function MagneticText({ text, className = "", mode = "lift" }: { text: string; className?: string; mode?: "lift" | "scatter" }) {
@@ -62,32 +57,26 @@ export function MagneticText({ text, className = "", mode = "lift" }: { text: st
     const entry = { root: root.current, letters: Array.from(root.current.querySelectorAll<HTMLElement>("[data-repel-letter]")), mode };
     repellers.add(entry);
 
-    if (!attached) {
-      window.addEventListener("pointermove", handlePointerMove, { passive: true });
-      window.addEventListener("blur", handlePointerLeave);
-      attached = true;
-    }
+    ensurePointerSubscription();
 
     return () => {
       repellers.delete(entry);
-      if (!repellers.size && attached) {
-        window.removeEventListener("pointermove", handlePointerMove);
-        window.removeEventListener("blur", handlePointerLeave);
-        attached = false;
-      }
-      if (!repellers.size && frame) {
-        window.cancelAnimationFrame(frame);
-        frame = 0;
+      if (!repellers.size && unsubscribePointer) {
+        unsubscribePointer();
+        unsubscribePointer = undefined;
       }
     };
   }, [mode]);
 
   return (
-    <span ref={root} className={`magnetic-text ${className}`} aria-label={text}>
+    <span ref={root} className={`magnetic-text ${className}`}>
+      <span className="sr-only">{text}</span>
+      <span aria-hidden="true">
       {text.split(/(\s+)/).map((part, groupIndex) => {
         if (/^\s+$/.test(part)) return part;
         return <span className="magnetic-word" aria-hidden="true" key={`${part}-${groupIndex}`}>{Array.from(part).map((letter, letterIndex) => <span data-repel-letter key={`${letter}-${letterIndex}`}>{letter}</span>)}</span>;
       })}
+      </span>
     </span>
   );
 }

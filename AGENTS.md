@@ -53,7 +53,8 @@ Create a memorable, calm, minimal portfolio for a balanced audience of hiring te
 
 - Motion is an editorial cue, not decoration. Use GSAP and ScrollTrigger only where motion helps hierarchy or storytelling.
 - Animate only `transform` and `opacity`. Do not use scroll listeners to drive React state, scroll hijacking, excessive parallax, or a custom cursor. Keep the native cursor visible.
-- The loader may appear only briefly during a first session and must not fake a progress meter.
+- The loader is a first-session copper-leaf sequence. It must disappear within 900ms, never fake progress, and include a CSS fallback that reveals the page if JavaScript is delayed. Reduced-motion users skip it.
+- A global copper-leaf atmosphere is allowed on the home page and project case studies. Use only the existing copper accent and its soft tonal variations. Leaves must stay out of readable copy, never intercept pointer events, support passive mouse and touch movement, pause in hidden tabs, and become static under reduced motion.
 - The home-page selected-work area is a GSAP pinned type-led sequence. Each project uses a huge chocolate-toned title and factual notes. Do not render project images or restore an image-card grid there. Project case-study routes may keep their contextual editorial technical art.
 - A restrained letter-lift interaction is allowed because Kush explicitly requested it. Implement it through one shared `requestAnimationFrame` loop, keep the native cursor, and disable it for coarse pointers, tablet/mobile viewports, and reduced-motion preferences. Do not hide or replace letters.
 - Apply the shared letter-lift wrapper to every visible text string on the home page and project case studies, including section labels, headings, body copy, links, footer details, and navigation. The standard interaction is motion only: the letter beneath a nearby fine-pointer cursor rises slightly while neighboring letters remain almost still. Never change text colour solely because the cursor is nearby. Keep the cursor treatment as a restrained outline, not a filled highlight.
@@ -63,8 +64,10 @@ Create a memorable, calm, minimal portfolio for a balanced audience of hiring te
 - Mobile is a distinct editorial sequence, not a shrunken desktop. On narrow touch screens, provide an accessible compact menu, keep the hero actions in the first viewport, sequence project chapters in with one-time GSAP reveals, present experience as an intentional horizontal swipe rail with a brief tile-wipe reveal for each chapter, and add clear tactile press feedback to links. A chapter must remain fully readable after it has been revealed. The loader should be a brief abstract tile sequence, never a fake progress meter.
 - Test the final site in available browser surfaces and report any browser limitation honestly. Resolve visible development errors before handoff.
 - Pinned GSAP project and experience sequences must have enough scroll distance for each panel to fully exit before the next enters. Never overlap panels during fast scrolling. Use stable, unique React keys for all mapped UI.
+- Scroll entrances reveal meaningful content elements from bottom to top: labels, headings, paragraphs, links, metadata, and rows. They run once and preserve their final visible state when a user scrolls back. Do not hide content with CSS before JavaScript runs.
 - Support `prefers-reduced-motion` by presenting final states immediately and disabling nonessential animation.
 - All interactive work items must have keyboard focus states and work without hover.
+- Content metadata may use a more readable 11-15px hierarchy. Increase repository names, PR references, experience labels, source links, and case-study labels without enlarging the compact navigation, hero buttons, or footer metadata enough to change layout.
 
 ## Visual guardrails
 

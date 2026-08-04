@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowUpRight, GithubLogo } from "@phosphor-icons/react/dist/
 import { notFound } from "next/navigation";
 import { Header } from "@/components/header";
 import { MagneticText } from "@/components/magnetic-text";
+import { Reveal } from "@/components/reveal";
 import { projects } from "@/data/portfolio";
 
 export function generateStaticParams() { return projects.map(({ slug }) => ({ slug })); }
@@ -23,20 +24,20 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
     <main>
       <Header />
       <article className="case-study">
-        <Link className="back-link" href="/#work"><ArrowLeft aria-hidden="true" /> <MagneticText text="Back to work" /></Link>
-        <header>
-          <p className="case-meta"><MagneticText text={`Project. ${project.year}`} /></p>
-          <h1><MagneticText text={project.title} /></h1>
-          <p><MagneticText text={project.summary} /></p>
-        </header>
-        <div className="case-image"><Image src={project.image} alt={project.imageAlt} fill priority sizes="(max-width: 900px) 92vw, 82vw" /></div>
-        <div className="case-content">
-          <div><p className="micro-title"><MagneticText text="Overview" /></p><p><MagneticText text={project.description} /></p></div>
-          <div><p className="micro-title"><MagneticText text="Engineering focus" /></p><p><MagneticText text={project.focus} /></p></div>
-          <div><p className="micro-title"><MagneticText text="Technology" /></p><ul>{project.technologies.map((item) => <li key={item}><MagneticText text={item} /></li>)}</ul></div>
-        </div>
-        <div className="case-notes"><p className="micro-title"><MagneticText text="System notes" /></p><ul>{project.systemNotes.map((note) => <li key={note}><MagneticText text={note} /></li>)}</ul></div>
-        <div className="case-links"><a href={project.githubUrl} target="_blank" rel="noreferrer"><GithubLogo aria-hidden="true" /> <MagneticText text="View repository" /> <ArrowUpRight aria-hidden="true" /></a><Link href="/#contact"><MagneticText text="Start a conversation" /> <ArrowUpRight aria-hidden="true" /></Link></div>
+        <Reveal><Link className="back-link" data-reveal-item href="/#work"><ArrowLeft aria-hidden="true" /> <MagneticText text="Back to work" /></Link></Reveal>
+        <Reveal as="header">
+          <p className="case-meta" data-reveal-item><MagneticText text={`Project. ${project.year}`} /></p>
+          <h1 data-reveal-item><MagneticText text={project.title} /></h1>
+          <p data-reveal-item><MagneticText text={project.summary} /></p>
+        </Reveal>
+        <Reveal className="case-image-reveal"><div className="case-image" data-reveal-item><Image src={project.image} alt={project.imageAlt} fill priority sizes="(max-width: 900px) 92vw, 82vw" /></div></Reveal>
+        <Reveal className="case-content">
+          <div data-reveal-item><p className="micro-title"><MagneticText text="Overview" /></p><p><MagneticText text={project.description} /></p></div>
+          <div data-reveal-item><p className="micro-title"><MagneticText text="Engineering focus" /></p><p><MagneticText text={project.focus} /></p></div>
+          <div data-reveal-item><p className="micro-title"><MagneticText text="Technology" /></p><ul>{project.technologies.map((item) => <li key={item}><MagneticText text={item} /></li>)}</ul></div>
+        </Reveal>
+        <Reveal className="case-notes"><p className="micro-title" data-reveal-item><MagneticText text="System notes" /></p><ul data-reveal-item>{project.systemNotes.map((note) => <li key={note}><MagneticText text={note} /></li>)}</ul></Reveal>
+        <Reveal className="case-links"><a data-reveal-item href={project.githubUrl} target="_blank" rel="noreferrer"><GithubLogo aria-hidden="true" /> <MagneticText text="View repository" /> <ArrowUpRight aria-hidden="true" /></a><Link data-reveal-item href="/#contact"><MagneticText text="Start a conversation" /> <ArrowUpRight aria-hidden="true" /></Link></Reveal>
       </article>
     </main>
   );

@@ -5,6 +5,7 @@ import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MagneticText } from "@/components/magnetic-text";
+import { Reveal } from "@/components/reveal";
 import { capabilities } from "@/data/portfolio";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -26,15 +27,20 @@ export function ExperienceManifesto() {
       media.add("(min-width: 768px)", () => {
         const panels = gsap.utils.toArray<HTMLElement>("[data-experience-panel]");
         const line = root.current?.querySelector<HTMLElement>("[data-experience-line]");
+        const heading = root.current?.querySelector<HTMLElement>("[data-experience-heading]");
+        const summary = root.current?.querySelector<HTMLElement>("[data-experience-summary]");
         if (!line) return;
+        const revealTargets = (panel: HTMLElement) => panel.querySelectorAll<HTMLElement>("[data-experience-reveal]");
         gsap.set(panels, { autoAlpha: 0 });
-        gsap.set(panels[0], { autoAlpha: 1 });
+        gsap.set(panels.flatMap((panel) => Array.from(revealTargets(panel))), { autoAlpha: 0, y: 18 });
         const timeline = gsap.timeline({ scrollTrigger: { trigger: root.current, start: "top top", end: "+=360%", pin: ".experience-manifesto-sticky", scrub: 1.2, anticipatePin: 1 } });
+        if (heading || summary) timeline.fromTo([heading, summary].filter(Boolean), { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: 0.34, stagger: 0.08, ease: "power3.out" });
         timeline.fromTo(line, { scaleY: 0 }, { scaleY: 1, duration: 0.72, ease: "power2.inOut" });
+        timeline.set(panels[0], { autoAlpha: 1 }).to(revealTargets(panels[0]), { autoAlpha: 1, y: 0, duration: 0.42, stagger: 0.06, ease: "power3.out" }).to({}, { duration: 0.44 });
         panels.forEach((panel, index) => {
           if (index === 0) return;
           const previous = panels[index - 1];
-          timeline.to(previous, { autoAlpha: 0, scale: 0.98, y: -20, duration: 0.48, ease: "power2.inOut" }, `+=${index === 1 ? 0.58 : 0.4}`).fromTo(panel, { autoAlpha: 0, scale: 1.02, y: 20 }, { autoAlpha: 1, scale: 1, y: 0, duration: 0.58, ease: "power3.out" }, ">");
+          timeline.to(previous, { autoAlpha: 0, scale: 0.98, y: -20, duration: 0.38, ease: "power2.inOut" }).fromTo(panel, { autoAlpha: 0, scale: 1.02, y: 20 }, { autoAlpha: 1, scale: 1, y: 0, duration: 0.48, ease: "power3.out" }, ">").to(revealTargets(panel), { autoAlpha: 1, y: 0, duration: 0.42, stagger: 0.06, ease: "power3.out" }, "<0.08").to({}, { duration: 0.44 });
         });
       });
       media.add("(max-width: 767px)", () => {
@@ -45,7 +51,9 @@ export function ExperienceManifesto() {
 
         if (!rail || panels.length === 0) return;
 
-        gsap.set("[data-experience-wipe]", { display: "grid" });
+        const wipes = root.current?.querySelectorAll<HTMLElement>("[data-experience-wipe]") ?? [];
+        gsap.set(wipes, { display: "grid" });
+        gsap.set(panels.flatMap((panel) => Array.from(panel.querySelectorAll<HTMLElement>("[data-experience-reveal]"))), { autoAlpha: 0, y: 18 });
 
         const revealPanel = (index: number) => {
           if (revealed.has(index)) return;
@@ -53,14 +61,14 @@ export function ExperienceManifesto() {
           const panel = panels[index];
           const wipe = panel.querySelector<HTMLElement>("[data-experience-wipe]");
           const tiles = panel.querySelectorAll<HTMLElement>("[data-experience-tile]");
-          const copy = panel.querySelector<HTMLElement>("[data-experience-copy]");
-          const side = panel.querySelector<HTMLElement>("[data-experience-side]");
+          const targets = panel.querySelectorAll<HTMLElement>("[data-experience-reveal]");
 
           const timeline = gsap.timeline({ defaults: { overwrite: "auto" } });
           timeline.to(panel, { autoAlpha: 1, duration: 0.2, ease: "power2.out" });
           if (wipe) timeline.set(wipe, { autoAlpha: 1 });
           timeline.fromTo(tiles, { autoAlpha: 1, scale: 1 }, { autoAlpha: 0, scale: 0.58, duration: 0.38, stagger: { each: 0.025, from: "random" }, ease: "power2.out" }, "<");
-          timeline.fromTo([copy, side], { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.5, stagger: 0.07, ease: "power3.out" }, "<0.1");
+          if (wipe) timeline.set(wipe, { display: "none" });
+          timeline.to(targets, { autoAlpha: 1, y: 0, duration: 0.5, stagger: 0.08, ease: "power3.out" }, "<0.1");
         };
 
         const inspectRail = () => {
@@ -100,23 +108,23 @@ export function ExperienceManifesto() {
   return (
     <section className="experience-manifesto" id="experience" ref={root} aria-labelledby="experience-title">
       <div className="experience-manifesto-sticky">
-        <div className="experience-manifesto-heading"><p><MagneticText text="Experience and open source" /></p><h2 id="experience-title"><MagneticText text="Where I have worked." /></h2><p className="experience-swipe-hint"><MagneticText text="Swipe through" /> <ArrowRight aria-hidden="true" /></p></div>
-        <p className="experience-summary"><MagneticText text="A focused record of teaching, security-minded backend work, and contributions upstream." /></p>
+        <div className="experience-manifesto-heading" data-experience-heading><p><MagneticText text="Experience and open source" /></p><h2 id="experience-title"><MagneticText text="Where I have worked." /></h2><p className="experience-swipe-hint"><MagneticText text="Swipe through" /> <ArrowRight aria-hidden="true" /></p></div>
+        <p className="experience-summary" data-experience-summary><MagneticText text="A focused record of teaching, security-minded backend work, and contributions upstream." /></p>
         <div className="experience-rule" aria-hidden="true"><span data-experience-line /></div>
         <div className="experience-moments" data-experience-rail>
           {moments.map((moment, index) => (
             <article className="experience-moment" data-experience-panel key={moment.title}>
               <div className="experience-pixel-wipe" data-experience-wipe aria-hidden="true">{Array.from({ length: 16 }, (_, tile) => <span data-experience-tile key={tile} />)}</div>
-              <div className="experience-copy" data-experience-copy><p><MagneticText text={`0${index + 1}. ${moment.label}`} /></p><h3><MagneticText text={moment.title} /></h3><p><MagneticText text={moment.detail} /></p>{moment.href ? <a href={moment.href} target="_blank" rel="noreferrer"><MagneticText text="View merged pull request" /></a> : null}</div>
-              <div className="experience-side" data-experience-side><p className="experience-word"><MagneticText text={moment.word} /></p><p className="experience-meta"><MagneticText text={moment.meta} /></p></div>
+              <div className="experience-copy" data-experience-copy><p data-experience-reveal><MagneticText text={`0${index + 1}. ${moment.label}`} /></p><h3 data-experience-reveal><MagneticText text={moment.title} /></h3><p data-experience-reveal><MagneticText text={moment.detail} /></p>{moment.href ? <a data-experience-reveal href={moment.href} target="_blank" rel="noreferrer"><MagneticText text="View merged pull request" /></a> : null}</div>
+              <div className="experience-side" data-experience-side><p className="experience-word" data-experience-reveal><MagneticText text={moment.word} /></p><p className="experience-meta" data-experience-reveal><MagneticText text={moment.meta} /></p></div>
             </article>
           ))}
         </div>
       </div>
-      <div className="capability-strip">
-        <p><MagneticText text="What I use" /></p>
-        {capabilities.map(([group, ...skills]) => <article key={group}><h3><MagneticText text={group} /></h3><p><MagneticText text={skills.join(", ")} /></p></article>)}
-      </div>
+      <Reveal className="capability-strip">
+        <p data-reveal-item><MagneticText text="What I use" /></p>
+        {capabilities.map(([group, ...skills]) => <article data-reveal-item key={group}><h3><MagneticText text={group} /></h3><p><MagneticText text={skills.join(", ")} /></p></article>)}
+      </Reveal>
     </section>
   );
 }

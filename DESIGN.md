@@ -42,12 +42,19 @@ Use a fixed light scheme. No theme switch and no automatic dark mode.
 
 ## Home page sequence
 
-1. **First-visit loader**. A restrained sequence of mineral-colour tiles rises and settles. CSS animation guarantees it exits even if JavaScript is delayed. Reduced-motion users skip it.
+1. **First-visit loader**. Seven copper leaves fall and disperse around the wordmark. CSS animation guarantees it exits within 900ms even if JavaScript is delayed. Reduced-motion users skip it.
 2. **Light hero**. A typography-only editorial manifesto with a large left-aligned name and positioning. Use cropped, masked text, a copper field, and subtle type movement as the visual composition. Do not place a portrait, deity, character, or hero image here.
 3. **Selected work sequence**. A compact pinned type-led sequence progresses through four projects. Each frame uses a huge kinetic chocolate-toned project name, concise engineering notes, stack, and source link. Do not render project images or a card grid here.
 5. **Open-source field notes**. `13 authored PRs` is the headline, followed by actual Redis, Hazelcast, Apache Spark, and Appwrite references with their PR numbers and direct links.
 6. **Experience as a scroll manifesto**. A terracotta vertical rule draws through a pinned two-column composition. Four proof points appear in order: building interactive systems, teaching 100+ students, backend work at Infosys Springboard, and merged upstream contributions. Capabilities follow as a compact editorial matrix.
 7. **Contact**. Bright closing section with email as the only dominant action and useful profile links below.
+
+## Spring atmosphere and readable metadata
+
+- A low-opacity global field of forest leaves is present on the home page and case studies. Leaves drift slowly, move away from a nearby mouse or finger, and never block content or interaction.
+- The desktop hero pixel mark reacts tile by tile to a nearby fine-pointer cursor. It remains hidden on mobile.
+- Open-source repository names, PR references, experience labels, technology metadata, and case-study utility text use a more readable 11-15px hierarchy. Navigation and button labels remain compact.
+- Static sections reveal labels, headings, body copy, and links one after another from bottom to top. Revealed content stays fully visible on return visits.
 
 ## Project case studies
 
@@ -74,7 +81,7 @@ Style: editorial technical illustration, warm off-white ground, charcoal linewor
 ## GSAP motion plan
 
 - Use `gsap.matchMedia()` to scope desktop-only project-deck and hover choreography.
-- Loader: abstract tile rise, opacity exit. CSS animation fallback ends it at 1.1 seconds.
+- Loader: falling leaves, wordmark rise, and opacity exit. CSS animation fallback ends it within 900ms.
 - Hero entry: title and supporting copy rise in sequence. A short tile mask may reveal the title, but tiles must not remain as decoration once the entrance completes.
 - Hero: masked words rise once, then settle. The composition may use a subtle copper field and type-scale shift only when reduced motion is off.
 - Work sequence: each project crossfades with a 10px directional shift as its scroll segment becomes active. Its title may cycle through a restrained set of font variations only while hovered.
@@ -84,6 +91,7 @@ Style: editorial technical illustration, warm off-white ground, charcoal linewor
 - Keep the native cursor visible. A small cursor aura may change to muted forest green over interactive text. Nearby letters lift smoothly but are never hidden or replaced. Do not use canvas, WebGL, or scroll listeners driving React state.
 - Reduced motion presents complete content immediately and disables looping or pointer motion.
 - Mobile uses a separate one-column rhythm: a compact expandable navigation, a centred type-led hero with a restrained tile-mask reveal and no static pixel mark, project chapters with one-time entry reveals, a horizontal experience rail whose chapters open through a subtle tile wipe, and tactile press feedback. Do not attempt to simulate a desktop cursor on touch devices.
+- The copper leaf atmosphere uses varied leaf weights, staggered crosswind and settling paths, and passive touch movement without interfering with native mobile scrolling. The supplied autumn reference informs only this loose drifting behavior. Its assets and page layout are not used.
 
 ## Responsive and accessibility rules
 
